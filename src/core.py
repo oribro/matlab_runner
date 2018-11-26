@@ -2,8 +2,7 @@ import tkinter as tk
 from tkinter import ttk, font, filedialog
 from os import listdir
 from os.path import isfile, join
-from time import sleep
-
+import sys
 
 class NoMatlabFilesException(Exception):
     """
@@ -210,6 +209,18 @@ class GUI(object):
 
     def get_chosen_file(self):
         return self.chosen_file
+
+    def restart(self):
+        # Set GUI to initial state
+        text = 'enter בחר תיקייה בה נמצאים קבצי מטלאב להרצה. לאחר מכן הקש '
+        self.instruction.set(text)
+        self.button.config(state='active')
+        self.path_field.config(state='active')
+        self.options.delete(0, 'end')
+        self.options.config(state='disabled')
+        self.file_choice_field.config(state='readonly')
+        self.start()
+        self.root.bind('<Return>', self.get_matlab_files)
 
     def end(self):
         return self.root.destroy()
