@@ -134,6 +134,11 @@ class GUI(object):
     def browse(self):
         self.folder_path.set(filedialog.askdirectory())
 
+    def set_browse_found(self):
+        self.instruction.set("נמצאו {} קבצי מטלאב".format(len(self.matlab_files)))
+        self.button.config(state='disabled')
+        self.path_field.config(state='disabled')
+
     def get_matlab_files(self, event):
         self.matlab_files = []
         try:
@@ -154,9 +159,7 @@ class GUI(object):
                 )
             # Path is legal and we can run at least one file.
             else:
-                self.instruction.set("נמצאו {} קבצי מטלאב".format(len(self.matlab_files)))
-                self.button.config(state='disabled')
-                self.path_field.config(state='disabled')
+                self.set_browse_found()
                 self.choose_matlab_file()
 
         # TODO: Handle special case when files are found and execution continues

@@ -1,4 +1,4 @@
-from core import GUI
+from src.core import GUI
 from subprocess import check_output
 
 
